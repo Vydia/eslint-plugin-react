@@ -88,6 +88,7 @@ ruleTester.run('jsx-one-element-per-line', rule, {
     // TODO: Contitionally support this
     code: '<App>{"foo"}</App>'
   }, {
+    // TODO: Contitionally support this
     code: '<App>foo</App>'
   }, {
     code: '<App foo="bar" />'
@@ -194,7 +195,7 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '  foo<input />',
       '</div>'
     ].join('\n'),
-    // TODO: Perhaps don't need to wrap in JSXExpressionContainer.
+    // TODO: Perhaps don't need to wrap in JSXExpressionContainer, however we could leave that up to jsx-curly-brace-presence.
     output: [
       '<div>',
       '  {\'foo\'}',
@@ -240,8 +241,7 @@ ruleTester.run('jsx-one-element-per-line', rule, {
     output: [
       '<div>',
       '  <span />',
-      '{\' \'}',
-      '<input />',
+      '{\' \'}<input />',
       '</div>'
     ].join('\n'),
     errors: [
@@ -252,10 +252,33 @@ ruleTester.run('jsx-one-element-per-line', rule, {
   }, {
     code: [
       '<div>',
+      '  <span />',
+      '{\' \'}<input />',
+      '</div>'
+    ].join('\n'),
+    output: [
+      '<div>',
+      '  <span />',
+      '{\' \'}',
+      '<input />',
+      '</div>'
+    ].join('\n'),
+    errors: [
+      {message: 'Opening tag for Element `input` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+  }, {
+    code: [
+      '<div>',
       '  <input /> foo',
       '</div>'
     ].join('\n'),
-    // output: TODO
+    output: [
+      '<div>',
+      '  <input />',
+      '{\' foo\'}',
+      '</div>'
+    ].join('\n'),
     errors: [{message: 'Literal ` foo` must be placed on a new line'}],
     parserOptions: parserOptions
   }, {
@@ -264,7 +287,12 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '  {"foo"} <input />',
       '</div>'
     ].join('\n'),
-    // output: TODO
+    output: [
+      '<div>',
+      '  {"foo"}',
+      '{\' \'}<input />',
+      '</div>'
+    ].join('\n'),
     errors: [
       {message: 'Literal ` ` must be placed on a new line'},
       {message: 'Opening tag for Element `input` must be placed on a new line'}
@@ -276,7 +304,12 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '  {"foo"} bar',
       '</div>'
     ].join('\n'),
-    // output: TODO
+    output: [
+      '<div>',
+      '  {"foo"}',
+      '{\' bar\'}',
+      '</div>'
+    ].join('\n'),
     errors: [{message: 'Literal ` bar` must be placed on a new line'}],
     parserOptions: parserOptions
   }, {
@@ -285,10 +318,14 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '  foo {"bar"}',
       '</div>'
     ].join('\n'),
-    // output: TODO
+    output: [
+      '<div>',
+      '  {\'foo \'}',
+      '{"bar"}',
+      '</div>'
+    ].join('\n'),
     errors: [
-      {message: 'Literal `foo ` must be placed on a new line'},
-      {message: 'JSXExpressionContainer `{"bar"}` must be placed on a new line'}
+      {message: 'Literal `foo ` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
@@ -297,7 +334,12 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '  <input /> {"foo"}',
       '</div>'
     ].join('\n'),
-    // output: TODO
+    output: [
+      '<div>',
+      '  <input />',
+      '{\' \'}{"foo"}',
+      '</div>'
+    ].join('\n'),
     errors: [
       {message: 'Literal ` ` must be placed on a new line'},
       {message: 'JSXExpressionContainer `{"foo"}` must be placed on a new line'}
