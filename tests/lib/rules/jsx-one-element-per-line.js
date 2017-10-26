@@ -62,6 +62,23 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       {message: 'Literal ` bar` must be placed on a new line'}
     ],
     parserOptions: parserOptions
+  }, {
+    // TODO: If I'm a literal and I'm the first child, chop off all leading whitespace.
+    code: [
+      '<div>',
+      '  foo {"bar"}',
+      '</div>'
+    ].join('\n'),
+    output: [
+      '<div>',
+      '  {\'foo \'}', // TODO: Must escape before injecting literal?
+      '{"bar"}',
+      '</div>'
+    ].join('\n'),
+    errors: [
+      {message: 'Literal `foo ` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
   }]
 
   // valid: [{
