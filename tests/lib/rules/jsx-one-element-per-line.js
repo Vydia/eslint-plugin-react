@@ -690,5 +690,87 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       {message: '` baz ` must be placed on a new line'}
     ],
     parserOptions: parserOptions
+  }, {
+    code: [
+      '<App>{',
+      '  foo',
+      '}</App>'
+    ].join('\n'),
+    output: [
+      '<App>',
+      '{',
+      '  foo',
+      '}</App>'
+    ].join('\n'),
+    errors: [
+      // TODO: Better handle when child starts and ends on different lines.
+      // In the mean time, multiple passes work great.
+      {message: '`{  foo}` must be placed on a new line'},
+      {message: '`{  foo}` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+  }, {
+    code: [
+      '<App>',
+      '{',
+      '  foo',
+      '}</App>'
+    ].join('\n'),
+    output: [
+      '<App>',
+      '{',
+      '  foo',
+      '}',
+      '</App>'
+    ].join('\n'),
+    errors: [
+      // TODO: Better handle when child starts and ends on different lines.
+      // In the mean time, multiple passes work great.
+      {message: '`{  foo}` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+  }, {
+    code: [
+      '<App> {',
+      '  foo',
+      '} </App>'
+    ].join('\n'),
+    output: [
+      '<App> ',
+      '{\' \'}',
+      '{',
+      '  foo',
+      '} </App>'
+    ].join('\n'),
+    errors: [
+      // TODO: Better handle when child starts and ends on different lines.
+      // In the mean time, multiple passes work great.
+      {message: '`{  foo}` must be placed on a new line'},
+      {message: '`{  foo}` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+  }, {
+    code: [
+      '<App> ',
+      '{\' \'}',
+      '{',
+      '  foo',
+      '} </App>'
+    ].join('\n'),
+    output: [
+      '<App> ',
+      '{\' \'}',
+      '{',
+      '  foo',
+      '}',
+      '{\' \'}',
+      ' </App>'
+    ].join('\n'),
+    errors: [
+      // TODO: Better handle when child starts and ends on different lines.
+      // In the mean time, multiple passes work great.
+      {message: '`{  foo}` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
   }]
 });
