@@ -209,22 +209,80 @@ ruleTester.run('jsx-one-element-per-line', rule, {
   //   ],
   //   parserOptions: parserOptions
   // }, {
+
+
     code: [
-      '<Text style={styles.foo}>{ bar } { I18n.t(\'baz\') }</Text>'
+      '<Text style={styles.foo}>{ bar } <Text/> { I18n.t(\'baz\') }</Text>'
     ].join('\n'),
     output: [
       '<Text style={styles.foo}>',
-      '{ bar }',
-      '{\' \'}{ I18n.t(\'baz\') }',
+      '{ bar } ',
+      '{\' \'}',
+      '<Text/>',
+      '{\' \'}',
+      '{ I18n.t(\'baz\') }',
       '</Text>'
     ].join('\n'),
     errors: [
-      {message: 'JSXExpressionContainer `{ bar }` must be placed on a new line'},
-      {message: 'Literal ` ` must be placed on a new line'},
-      {message: 'JSXExpressionContainer `{ I18n.t(\'baz\') }` must be placed on a new line'},
-      {message: 'Closing tag for Element `Text` must be placed on a new line'}
+      {message: '`[object Object]` must be placed on a new line'},
+      {message: '`[object Object]` must be placed on a new line'},
+      {message: '`[object Object]` must be placed on a new line'},
+      {message: '`[object Object]` must be placed on a new line'}
+
+      // {message: 'JSXExpressionContainer `{ bar }` must be placed on a new line'},
+      // {message: 'Literal ` ` must be placed on a new line'},
+      // {message: 'JSXExpressionContainer `{ I18n.t(\'baz\') }` must be placed on a new line'},
+      // {message: 'Closing tag for Element `Text` must be placed on a new line'}
     ],
     parserOptions: parserOptions
+
+  }, {
+
+    code: [
+      '<Text style={styles.foo}> <Text/></Text>'
+    ].join('\n'),
+    output: [
+      '<Text style={styles.foo}> ',
+      '{\' \'}',
+      '<Text/>',
+      '</Text>'
+    ].join('\n'),
+    errors: [
+      {message: '`[object Object]` must be placed on a new line'}
+
+      // {message: 'JSXExpressionContainer `{ bar }` must be placed on a new line'},
+      // {message: 'Literal ` ` must be placed on a new line'},
+      // {message: 'JSXExpressionContainer `{ I18n.t(\'baz\') }` must be placed on a new line'},
+      // {message: 'Closing tag for Element `Text` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+
+
+    // code: [
+    //   '<Text style={styles.foo}>',
+    //   '{ bar } ',
+    //   '{ I18n.t(\'baz\') }',
+    //   '</Text>'
+    // ].join('\n'),
+    // output: [
+    //   '<Text style={styles.foo}>',
+    //   '{ bar }',
+    //   '{\' \'}',
+    //   '{ I18n.t(\'baz\') }',
+    //   '</Text>'
+    // ].join('\n'),
+    // errors: [
+    //   {message: '`[object Object]` must be placed on a new line'},
+    //   {message: '`[object Object]` must be placed on a new line'}
+    //
+    //   // {message: 'JSXExpressionContainer `{ bar }` must be placed on a new line'},
+    //   // {message: 'Literal ` ` must be placed on a new line'},
+    //   // {message: 'JSXExpressionContainer `{ I18n.t(\'baz\') }` must be placed on a new line'},
+    //   // {message: 'Closing tag for Element `Text` must be placed on a new line'}
+    // ],
+    // parserOptions: parserOptions
+
+
   // }, {
   //   code: [
   //     '<Text style={styles.foo}>',
