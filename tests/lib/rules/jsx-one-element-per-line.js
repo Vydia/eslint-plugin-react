@@ -672,7 +672,7 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '<App>',
       '  <Foo>',
       '    <Bar> baz </Bar>',
-      '</Foo>',
+      '  </Foo>',
       '</App>'
     ].join('\n'),
     output: [
@@ -683,11 +683,79 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       ' baz ',
       '{\' \'}',
       '</Bar>',
-      '</Foo>',
+      '  </Foo>',
       '</App>'
     ].join('\n'),
     errors: [
       {message: '` baz ` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+  }, {
+    code: [
+      '<App>',
+      '  foo {"bar"} baz',
+      '</App>'
+    ].join('\n'),
+    output: [
+      '<App>',
+      '  foo ',
+      '{\' \'}',
+      '{"bar"} baz',
+      '</App>'
+    ].join('\n'),
+    errors: [
+      // TODO: Handle in one pass. For now, multipass works fine.
+      {message: '`{"bar"}` must be placed on a new line'},
+      {message: '` baz` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+  }, {
+    code: [
+      '<App>',
+      '',
+      '  foo {"bar"} baz',
+      '',
+      '</App>'
+    ].join('\n'),
+    output: [
+      '<App>',
+      '',
+      '  foo ',
+      '{\' \'}',
+      '{"bar"} baz',
+      '',
+      '</App>'
+    ].join('\n'),
+    errors: [
+      // TODO: Handle in one pass. For now, multipass works fine.
+      {message: '`{"bar"}` must be placed on a new line'},
+      {message: '` baz` must be placed on a new line'}
+    ],
+    parserOptions: parserOptions
+  }, {
+    code: [
+      '<App>',
+      '',
+      '  foo ',
+      '{\' \'}',
+      '{"bar"} baz',
+      '',
+      '</App>'
+    ].join('\n'),
+    output: [
+      '<App>',
+      '',
+      '  foo ',
+      '{\' \'}',
+      '{"bar"}',
+      '{\' \'}',
+      ' baz',
+      '',
+      '</App>'
+    ].join('\n'),
+    errors: [
+      // TODO: Handle in one pass. For now, multipass works fine.
+      {message: '` baz` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
