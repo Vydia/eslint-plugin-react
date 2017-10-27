@@ -407,6 +407,21 @@ ruleTester.run('jsx-one-element-per-line', rule, {
     ].join('\n'),
     errors: [{message: '`input` must be placed on a new line'}],
     parserOptions: parserOptions
+  }, {
+    code: [
+      '<div>',
+      '  <input /> foo',
+      '</div>'
+    ].join('\n'),
+    output: [
+      '<div>',
+      '  <input />',
+      '{\' \'}',
+      ' foo',
+      '</div>'
+    ].join('\n'),
+    errors: [{message: '` foo` must be placed on a new line'}],
+    parserOptions: parserOptions
   // }, {
   //   code: [
   //     '<div>',
