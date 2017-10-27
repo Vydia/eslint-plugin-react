@@ -88,7 +88,6 @@ ruleTester.run('jsx-one-element-per-line', rule, {
   }],
 
   invalid: [{
-    // TODO: Contitionally support this with an option.
     code: '<App>{"foo"}</App>',
     output: [
       '<App>',
@@ -98,7 +97,6 @@ ruleTester.run('jsx-one-element-per-line', rule, {
     errors: [{message: '`{"foo"}` must be placed on a new line'}],
     parserOptions: parserOptions
   }, {
-    // TODO: Contitionally support this with an option.
     code: '<App>foo</App>',
     output: [
       '<App>',
@@ -691,6 +689,7 @@ ruleTester.run('jsx-one-element-per-line', rule, {
     ],
     parserOptions: parserOptions
   }, {
+    // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App>',
       '  foo {"bar"} baz',
@@ -704,12 +703,12 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '</App>'
     ].join('\n'),
     errors: [
-      // TODO: Handle in one pass. For now, multipass works fine.
       {message: '`{"bar"}` must be placed on a new line'},
       {message: '` baz` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
+    // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App>',
       '',
@@ -727,12 +726,12 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '</App>'
     ].join('\n'),
     errors: [
-      // TODO: Handle in one pass. For now, multipass works fine.
       {message: '`{"bar"}` must be placed on a new line'},
       {message: '` baz` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
+    // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App>',
       '',
@@ -754,11 +753,11 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '</App>'
     ].join('\n'),
     errors: [
-      // TODO: Handle in one pass. For now, multipass works fine.
       {message: '` baz` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
+    // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App>{',
       '  foo',
@@ -771,13 +770,12 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '}</App>'
     ].join('\n'),
     errors: [
-      // TODO: Better handle when child starts and ends on different lines.
-      // In the mean time, multiple passes work great.
       {message: '`{  foo}` must be placed on a new line'},
       {message: '`{  foo}` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
+    // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App>',
       '{',
@@ -792,12 +790,11 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '</App>'
     ].join('\n'),
     errors: [
-      // TODO: Better handle when child starts and ends on different lines.
-      // In the mean time, multiple passes work great.
       {message: '`{  foo}` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
+    // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App> {',
       '  foo',
@@ -811,13 +808,12 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       '} </App>'
     ].join('\n'),
     errors: [
-      // TODO: Better handle when child starts and ends on different lines.
-      // In the mean time, multiple passes work great.
       {message: '`{  foo}` must be placed on a new line'},
       {message: '`{  foo}` must be placed on a new line'}
     ],
     parserOptions: parserOptions
   }, {
+    // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App> ',
       '{\' \'}',
@@ -835,8 +831,6 @@ ruleTester.run('jsx-one-element-per-line', rule, {
       ' </App>'
     ].join('\n'),
     errors: [
-      // TODO: Better handle when child starts and ends on different lines.
-      // In the mean time, multiple passes work great.
       {message: '`{  foo}` must be placed on a new line'}
     ],
     parserOptions: parserOptions
