@@ -392,20 +392,21 @@ ruleTester.run('jsx-one-element-per-line', rule, {
     ].join('\n'),
     errors: [{message: '`span` must be placed on a new line'}],
     parserOptions: parserOptions
-  // }, {
-  //   code: [
-  //     '<div>',
-  //     '  foo <input />',
-  //     '</div>'
-  //   ].join('\n'),
-  //   output: [
-  //     '<div>',
-  //     '  {\'foo \'}',
-  //     '<input />',
-  //     '</div>'
-  //   ].join('\n'),
-  //   errors: [{message: 'Literal `foo ` must be placed on a new line'}],
-  //   parserOptions: parserOptions
+  }, {
+    code: [
+      '<div>',
+      '  foo <input />',
+      '</div>'
+    ].join('\n'),
+    output: [
+      '<div>',
+      '  foo ',
+      '{\' \'}',
+      '<input />',
+      '</div>'
+    ].join('\n'),
+    errors: [{message: '`input` must be placed on a new line'}],
+    parserOptions: parserOptions
   // }, {
   //   code: [
   //     '<div>',
