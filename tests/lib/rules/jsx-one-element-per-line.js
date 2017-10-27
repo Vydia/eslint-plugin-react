@@ -370,26 +370,28 @@ ruleTester.run('jsx-one-element-per-line', rule, {
     ].join('\n'),
     output: [
       '<div>',
-      '  {\'foo\'}',
+      '  foo',
       '<input />',
       '</div>'
     ].join('\n'),
-    errors: [{message: '`input` must be placed on a new line'}],
+    errors: [
+      {message: '`input` must be placed on a new line'}
+    ],
     parserOptions: parserOptions
-  // }, {
-  //   code: [
-  //     '<div>',
-  //     '  {"foo"}<span />',
-  //     '</div>'
-  //   ].join('\n'),
-  //   output: [
-  //     '<div>',
-  //     '  {"foo"}',
-  //     '<span />',
-  //     '</div>'
-  //   ].join('\n'),
-  //   errors: [{message: 'Opening tag for Element `span` must be placed on a new line'}],
-  //   parserOptions: parserOptions
+  }, {
+    code: [
+      '<div>',
+      '  {"foo"}<span />',
+      '</div>'
+    ].join('\n'),
+    output: [
+      '<div>',
+      '  {"foo"}',
+      '<span />',
+      '</div>'
+    ].join('\n'),
+    errors: [{message: '`span` must be placed on a new line'}],
+    parserOptions: parserOptions
   // }, {
   //   code: [
   //     '<div>',
