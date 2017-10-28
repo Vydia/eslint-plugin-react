@@ -132,7 +132,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
   //     '<div>',
   //     '  {"foo"}',
   //     '{\' \'}',
-  //     ' bar',
+  //     'bar',
   //     '</div>'
   //   ].join('\n'),
   //   errors: [
@@ -377,7 +377,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
   //     '<div>',
   //     '  <input />',
   //     '{\' \'}',
-  //     ' foo',
+  //     'foo',
   //     '</div>'
   //   ].join('\n'),
   //   errors: [{message: '` foo` must be placed on a new line'}],
@@ -444,7 +444,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
   //     '<div>',
   //     '  {"foo"}',
   //     '{\' \'}',
-  //     ' bar',
+  //     'bar',
   //     '</div>'
   //   ].join('\n'),
   //   errors: [{message: '` bar` must be placed on a new line'}],
@@ -678,7 +678,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
   //     '  <Foo>',
   //     '    <Bar>',
   //     '{\' \'}',
-  //     ' baz ',
+  //     'baz',
   //     '{\' \'}',
   //     '</Bar>',
   //     '  </Foo>',
@@ -708,6 +708,9 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
   //   ],
   //   parserOptions: parserOptions
   // }, {
+  //
+
+
     // Would be nice to handle in one pass, but multipass works fine.
     code: [
       '<App>',
@@ -725,6 +728,8 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
       {message: '`{"bar"}` must be placed on a new line'}
     ],
     parserOptions: parserOptions
+
+
   // }, {
   //   // Would be nice to handle in one pass, but multipass works fine.
   //   code: [
@@ -740,7 +745,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
   //     '{\' \'}',
   //     '{"bar"}',
   //     '{\' \'}',
-  //     ' baz',
+  //     'baz',
   //     '</App>'
   //   ].join('\n'),
   //   errors: [
@@ -788,7 +793,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
   //     '{\' \'}',
   //     '{"bar"}',
   //     '{\' \'}',
-  //     ' baz',
+  //     'baz',
   //     '',
   //     '</App>'
   //   ].join('\n'),
